@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #dde4ef;
+            --bg2: #e4eaf4;
+            --white: #f0f4fc;
+            --shadow-dark: #b8c2d4;
+            --shadow-light: #ffffff;
+            --text: #3a4560;
+            --text-muted: #8a96b0;
+            --blue: #4361EE;
+            --green: #2ec486;
+            --red: #e84c6e;
+            --yellow: #f5a623;
+
+            --neu: 8px 8px 18px var(--shadow-dark), -8px -8px 18px var(--shadow-light);
+            --neu-sm: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+            --neu-lg: 14px 14px 30px var(--shadow-dark), -14px -14px 30px var(--shadow-light);
+            --neu-inset: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
+            --neu-inset-sm: inset 2px 2px 6px var(--shadow-dark), inset -2px -2px 6px var(--shadow-light);
+            --neu-card: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .neu {
+            box-shadow: var(--neu);
+            background: var(--bg);
+            border-radius: 20px;
+        }
+
+        .neu-sm {
+            box-shadow: var(--neu-sm);
+            background: var(--bg);
+            border-radius: 14px;
+        }
+
+        .neu-lg {
+            box-shadow: var(--neu-lg);
+            background: var(--bg);
+            border-radius: 28px;
+        }
+
+        .neu-inset {
+            box-shadow: var(--neu-inset);
+            background: var(--bg);
+            border-radius: 14px;
+        }
+
+        .neu-card {
+            box-shadow: var(--neu-card);
+            background: var(--bg);
+            border-radius: 24px;
+        }
+
+        .neu-circle {
+            box-shadow: var(--neu-sm);
+            background: var(--bg);
+            border-radius: 50%;
+        }
+
+        .neu-btn {
+            box-shadow: var(--neu-sm);
+            background: var(--bg);
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            transition: box-shadow 0.2s, transform 0.1s;
+            color: var(--text);
+            outline: none;
+        }
+
+        .neu-btn:hover {
+            box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+            transform: translateY(-1px);
+        }
+
+        .neu-btn:active {
+            box-shadow: var(--neu-inset-sm);
+            transform: translateY(0);
+        }
+
+        .neu-btn-blue {
+            background: linear-gradient(145deg, #5a74ff, #3651e0);
+            box-shadow: 6px 6px 14px #b0bbd6, -3px -3px 8px rgba(255, 255, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .neu-btn-blue:hover {
+            box-shadow: 8px 8px 18px #a8b5ce, -4px -4px 10px rgba(255, 255, 255, 0.7);
+        }
+
+        .neu-toggle {
+            width: 44px;
+            height: 24px;
+            border-radius: 999px;
+            box-shadow: var(--neu-inset-sm);
+            background: var(--bg);
+            position: relative;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            padding: 3px;
+            transition: background 0.3s;
+        }
+
+        .neu-toggle.on {
+            background: linear-gradient(145deg, #e8f0ff, var(--bg));
+        }
+
+        .neu-toggle-knob {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #d4dcea);
+            box-shadow: 3px 3px 7px var(--shadow-dark), -2px -2px 5px var(--shadow-light);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            flex-shrink: 0;
+        }
+
+        .neu-toggle.on .neu-toggle-knob {
+            transform: translateX(20px);
+            background: linear-gradient(145deg, #5a74ff, #3651e0);
+            box-shadow: 2px 2px 6px rgba(67, 97, 238, 0.5);
+        }
+
+        .card-number {
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.22em;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--shadow-dark);
+            box-shadow: var(--neu-inset-sm);
+        }
+
+        .dot.active {
+            box-shadow: none;
+            background: var(--blue);
+            width: 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--shadow-dark);
+            border-radius: 999px;
+            box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            box-shadow: var(--neu-sm);
+            overflow: hidden;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .contact-avatar:hover {
+            box-shadow: var(--neu);
+            transform: translateY(-3px);
+        }
+
+        .contact-avatar.add {
+            box-shadow: var(--neu-inset-sm);
+        }
+
+        .contact-avatar.add:hover {
+            box-shadow: var(--neu-inset);
+            transform: none;
+        }
+
+        .skill-track {
+            height: 8px;
+            border-radius: 999px;
+            box-shadow: var(--neu-inset-sm);
+            background: var(--bg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 999px;
+            width: 0%;
+            transition: width 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: none;
+        }
+
+        .tab-btn {
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-muted);
+            box-shadow: var(--neu-sm);
+            background: var(--bg);
+            border: none;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .tab-btn.active {
+            box-shadow: var(--neu-inset-sm);
+            color: var(--blue);
+        }
+
+        .neu-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: none;
+            outline: none;
+            background: var(--bg);
+            box-shadow: var(--neu-inset-sm);
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: box-shadow 0.2s;
+        }
+
+        .neu-input:focus {
+            box-shadow: inset 3px 3px 8px var(--shadow-dark), inset -3px -3px 8px var(--shadow-light), 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .neu-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .g-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .g-circle {
+            width: 26px;
+            height: 26px;
+        }
+
+        .proj-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--shadow-dark);
+            transition: all 0.3s;
+        }
+
+        .proj-dot.active {
+            width: 18px;
+            background: var(--blue);
+        }
+
+        .tl-bar {
+            width: 3px;
+            border-radius: 999px;
+            background: linear-gradient(to bottom, var(--shadow-dark), transparent);
+            margin: 0 auto;
+        }
+
+        @keyframes floatCard {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        .float-card {
+            animation: floatCard 5s ease-in-out infinite;
+        }
+
+        nav {
+            position: sticky;
+            top: 16px;
+            z-index: 100;
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            box-shadow: var(--neu-card);
+            background: var(--bg);
+            border-radius: 999px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .max-w {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .nav-inner {
+                border-radius: 20px;
+                padding: 10px 16px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-tabs {
+                width: 100%;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-status {
+                display: none !important;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .work-item {
+                grid-template-columns: auto 1fr !important;
+                gap: 12px !important;
+            }
+
+            .work-duration {
+                grid-column: 1 / -1;
+                text-align: left !important;
+                margin-top: 8px;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            .neu-lg {
+                padding: 20px !important;
+            }
+
+            .neu-card {
+                padding: 20px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <div style="padding-top:20px" id="navSection">
+        <nav>
+            <div class="nav-inner">
+                <div class="g-logo">
+                    <svg class="g-circle" viewBox="0 0 26 26" fill="none" id="navLogo">
+                        <circle cx="13" cy="13" r="13" fill="white" opacity="0.6" />
+                        <text x="4" y="19" font-size="16" font-family="Arial" font-weight="900" id="navLogoText"></text>
+                    </svg>
+                    <span style="color:var(--text);font-size:1.05rem" id="navName"></span>
+                </div>
+                <div style="display:flex;gap:6px" id="navTabs" class="nav-tabs"></div>
+                <div class="nav-status"
+                    style="display:flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:700;color:var(--green)">
+                    <div
+                        style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)">
+                    </div>
+                    Available
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- HERO -->
+    <section id="about" style="padding:50px 0 40px">
+        <div class="max-w">
+            <div class="hero-grid" style="display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start">
+
+                <!-- Left: Profile card -->
+                <div>
+                    <div class="neu-lg reveal float-card" style="padding:32px;position:relative;overflow:hidden">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+                            <div class="g-logo">
+                                <svg width="28" height="28" viewBox="0 0 28 28">
+                                    <circle cx="14" cy="14" r="14" fill="rgba(255,255,255,0.5)" />
+                                    <text x="4" y="21" font-size="17" font-family="Georgia" font-weight="900"
+                                        id="heroLogoText"></text>
+                                </svg>
+                                <span style="font-size:1.1rem;font-weight:800">Portfolio</span>
+                            </div>
+                            <div class="neu-circle"
+                                style="width:38px;height:38px;display:flex;align-items:center;justify-content:center">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="0" y="0" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                    <rect x="10" y="0" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                    <rect x="0" y="10" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                    <rect x="10" y="10" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Profile card inner -->
+                        <div class="neu"
+                            style="padding:24px 26px;margin-bottom:24px;position:relative;background:linear-gradient(145deg,#eef2fa,#dde4ef)">
+                            <div
+                                style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+                                <div style="display:flex;align-items:center;gap:8px">
+                                    <div
+                                        style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#003087,#009cde);box-shadow:2px 2px 6px rgba(0,48,135,0.3)">
+                                    </div>
+                                    <span style="font-weight:800;font-size:1rem;color:var(--blue)" id="cardName"></span>
+                                </div>
+                                <svg width="36" height="28" viewBox="0 0 36 28">
+                                    <rect x="1" y="1" width="34" height="26" rx="5" fill="#d4c67a" stroke="#c0a830"
+                                        stroke-width="1" />
+                                    <rect x="12" y="1" width="12" height="26" fill="rgba(0,0,0,0.08)" />
+                                    <rect x="1" y="10" width="34" height="8" fill="rgba(0,0,0,0.06)" />
+                                    <line x1="12" y1="1" x2="12" y2="27" stroke="#c0a830" stroke-width="0.5" />
+                                    <line x1="24" y1="1" x2="24" y2="27" stroke="#c0a830" stroke-width="0.5" />
+                                    <line x1="1" y1="10" x2="35" y2="10" stroke="#c0a830" stroke-width="0.5" />
+                                    <line x1="1" y1="18" x2="35" y2="18" stroke="#c0a830" stroke-width="0.5" />
+                                </svg>
+                            </div>
+                            <div class="card-number" style="margin-bottom:18px" id="cardMeta"></div>
+                            <div style="display:flex;align-items:center;justify-content:space-between">
+                                <span style="font-size:0.8rem;font-weight:600;color:var(--text-muted)"
+                                    id="cardLocation"></span>
+                                <div class="neu-toggle on" id="mainToggle" onclick="this.classList.toggle('on')">
+                                    <div class="neu-toggle-knob"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;gap:7px;justify-content:center;margin-bottom:22px">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+
+                        <div
+                            style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-radius:18px;box-shadow:var(--neu-inset-sm)">
+                            <span style="font-weight:700;font-size:1rem;color:var(--text-muted)">Projects Done</span>
+                            <span style="font-weight:800;font-size:1.4rem;color:var(--text)" id="projectsCount">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stats-grid"
+                        style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:20px" id="statsRow">
+                        <div class="neu reveal" style="padding:20px;text-align:center;transition-delay:0.05s">
+                            <div style="font-size:1.8rem;font-weight:800;color:var(--blue)" id="statYears">—</div>
+                            <div
+                                style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">
+                                Experience</div>
+                        </div>
+                        <div class="neu reveal" style="padding:20px;text-align:center;transition-delay:0.1s">
+                            <div style="font-size:1.8rem;font-weight:800;color:var(--green)" id="statProjects">0</div>
+                            <div
+                                style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">
+                                Projects</div>
+                        </div>
+                        <div class="neu reveal" style="padding:20px;text-align:center;transition-delay:0.15s">
+                            <div style="font-size:1.8rem;font-weight:800;color:var(--yellow)" id="statSkills">0</div>
+                            <div
+                                style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">
+                                Skills</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Profile info -->
+                <div style="display:flex;flex-direction:column;gap:20px">
+                    <div class="neu-card reveal" style="padding:28px">
+                        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+                            <div style="position:relative">
+                                <div class="neu-circle" style="width:72px;height:72px;padding:4px">
+                                    <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#b8c8e8,#dde4ef);display:flex;align-items:center;justify-content:center"
+                                        id="avatarContainer">
+                                        <!-- Avatar SVG injected by JS -->
+                                    </div>
+                                </div>
+                                <div
+                                    style="position:absolute;bottom:4px;right:4px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--bg);box-shadow:0 0 6px var(--green)">
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-weight:800;font-size:1.1rem" id="profileName"></div>
+                                <div style="font-size:0.78rem;color:var(--text-muted);font-weight:600;margin-top:3px"
+                                    id="profileRole"></div>
+                                <div style="font-size:0.72rem;color:var(--green);font-weight:700;margin-top:4px">●
+                                    Available for Freelance</div>
+                            </div>
+                        </div>
+                        <p style="font-size:0.82rem;line-height:1.85;color:var(--text-muted);font-weight:500"
+                            id="profileSummary"></p>
+                        <div style="display:flex;gap:10px;margin-top:20px">
+                            <a href="#projects" class="neu-btn neu-btn-blue"
+                                style="padding:12px 22px;font-size:0.85rem;text-decoration:none;text-align:center;flex:1;border-radius:14px;display:block"
+                                id="viewWorkBtn">View Work</a>
+                            <a href="#contact" class="neu-btn"
+                                style="padding:12px 22px;font-size:0.85rem;text-decoration:none;text-align:center;flex:1;border-radius:14px;display:block;color:var(--text)">Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- Skills chip grid (worked-with style) -->
+                    <div class="neu-card reveal" style="padding:22px;transition-delay:0.1s" id="skillsGridCard">
+                        <div
+                            style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:16px">
+                            Top Skills</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:10px" id="skillsGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" style="padding:40px 0" id="skillsSection">
+        <div class="max-w">
+            <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:30px">
+                <h2 class="reveal" style="font-size:1.5rem;font-weight:800">Technical Skills</h2>
+                <span style="font-size:0.75rem;color:var(--text-muted);font-weight:600" class="reveal">— what I bring to
+                    the table</span>
+            </div>
+            <!-- Tool chips -->
+            <div class="reveal" style="display:flex;flex-wrap:wrap;gap:10px;transition-delay:0.1s" id="skillChips">
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK EXP -->
+    <section id="work" style="padding:40px 0" id="workSection">
+        <div class="max-w">
+            <h2 class="reveal" style="font-size:1.5rem;font-weight:800;margin-bottom:30px">Work Experience</h2>
+            <div style="display:flex;flex-direction:column;gap:16px" id="workList"></div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" style="padding:40px 0" id="projectsSection">
+        <div class="max-w">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+                <h2 class="reveal" style="font-size:1.5rem;font-weight:800">Recent Projects</h2>
+                <div style="display:flex;gap:6px" class="reveal" id="projDots"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px" id="projectGrid" class="projects-grid">
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section style="padding:40px 0" id="educationSection">
+        <div class="max-w">
+            <h2 class="reveal" style="font-size:1.5rem;font-weight:800;margin-bottom:30px">Education</h2>
+            <div style="display:grid;gap:20px" id="educationGrid" class="education-grid"></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="padding:40px 0 80px">
+        <div class="max-w">
+            <h2 class="reveal" style="font-size:1.5rem;font-weight:800;margin-bottom:30px">Get In Touch</h2>
+            <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+                <!-- Left: contact card -->
+                <div style="display:flex;flex-direction:column;gap:16px">
+                    <div class="neu-lg reveal float-card" style="padding:28px;animation-delay:-2s">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+                            <div class="g-logo"><span style="font-size:1rem;font-weight:800">Contact Card</span></div>
+                            <div class="neu-circle"
+                                style="width:34px;height:34px;display:flex;align-items:center;justify-content:center">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                                    <rect x="0" y="0" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                    <rect x="10" y="0" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                    <rect x="0" y="10" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                    <rect x="10" y="10" width="6" height="6" rx="1.5" fill="var(--text-muted)" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="neu" style="padding:20px;margin-bottom:20px">
+                            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+                                <div
+                                    style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#4361EE,#738dff);box-shadow:2px 2px 5px rgba(67,97,238,0.3)">
+                                </div>
+                                <span style="font-weight:800;font-size:0.9rem;color:var(--blue)"
+                                    id="contactName"></span>
+                            </div>
+                            <div class="card-number" style="font-size:0.88rem;margin-bottom:14px" id="contactEmail">
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between">
+                                <span style="font-size:0.78rem;font-weight:600;color:var(--text-muted)"
+                                    id="contactPhone"></span>
+                                <div class="neu-toggle on">
+                                    <div class="neu-toggle-knob"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:7px;justify-content:center;margin-bottom:20px">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div
+                            style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-radius:16px;box-shadow:var(--neu-inset-sm)">
+                            <span style="font-weight:700;font-size:0.9rem;color:var(--text-muted)">Response Time</span>
+                            <span style="font-weight:800;font-size:1.2rem;color:var(--text)">~24hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: form -->
+                <div class="neu-card reveal" style="padding:32px;transition-delay:0.1s">
+                    <div style="font-weight:800;font-size:1.05rem;margin-bottom:24px">Send a Message</div>
+                    <div style="display:flex;flex-direction:column;gap:16px">
+                        <div>
+                            <label
+                                style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);display:block;margin-bottom:8px">Your
+                                Name</label>
+                            <input class="neu-input" placeholder="John Doe" id="formSenderName">
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);display:block;margin-bottom:8px">Email</label>
+                            <input class="neu-input" type="email" placeholder="john@example.com" id="formSenderEmail">
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);display:block;margin-bottom:8px">Message</label>
+                            <textarea class="neu-input" rows="4" placeholder="Tell me about your project..."
+                                style="resize:none" id="formMessage"></textarea>
+                        </div>
+                        <a href="" class="neu-btn neu-btn-blue"
+                            style="width:100%;padding:16px;font-size:0.95rem;border-radius:16px;margin-top:4px;display:block;text-align:center;text-decoration:none"
+                            id="sendBtn">
+                            Send Message
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="border-top:1px solid var(--shadow-dark);padding:24px;text-align:center" id="footerEl">
+        <span style="font-size:0.75rem;color:var(--text-muted);font-weight:600" id="footerText"></span>
+    </footer>
+
+    <script>
+        // ===================== AVATAR SVGs =====================
+        const maleAvatar = `<svg viewBox="0 0 64 64" fill="none" style="width:56px;height:56px">
+  <ellipse cx="32" cy="38" rx="20" ry="14" fill="#c8956c" opacity="0.3"/>
+  <ellipse cx="32" cy="28" rx="16" ry="18" fill="#c8956c"/>
+  <path d="M16 22 Q18 10 32 9 Q46 10 48 22 Q42 14 32 13 Q22 14 16 22Z" fill="#2a1505"/>
+  <path d="M16 22 Q14 28 15 34" stroke="#2a1505" stroke-width="5" stroke-linecap="round"/>
+  <path d="M48 22 Q50 28 49 34" stroke="#2a1505" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="25" cy="28" rx="4" ry="4.5" fill="white"/>
+  <ellipse cx="39" cy="28" rx="4" ry="4.5" fill="white"/>
+  <circle cx="25.5" cy="28.5" r="2.8" fill="#2a1505"/>
+  <circle cx="39.5" cy="28.5" r="2.8" fill="#2a1505"/>
+  <circle cx="26.5" cy="27.2" r="0.9" fill="white"/>
+  <circle cx="40.5" cy="27.2" r="0.9" fill="white"/>
+  <path d="M29 38 Q32 42 35 38" stroke="#8a5530" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+</svg>`;
+
+        const femaleAvatar = `<svg viewBox="0 0 64 64" fill="none" style="width:56px;height:56px">
+  <ellipse cx="32" cy="38" rx="20" ry="14" fill="#e8a090" opacity="0.3"/>
+  <ellipse cx="32" cy="28" rx="16" ry="18" fill="#e8a090"/>
+  <path d="M16 22 Q18 6 32 5 Q46 6 48 22 Q44 12 32 11 Q20 12 16 22Z" fill="#8a3020"/>
+  <path d="M12 20 Q14 14 20 18" stroke="#8a3020" stroke-width="4" stroke-linecap="round"/>
+  <path d="M52 20 Q50 14 44 18" stroke="#8a3020" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="25" cy="28" rx="4" ry="4.5" fill="white"/>
+  <ellipse cx="39" cy="28" rx="4" ry="4.5" fill="white"/>
+  <circle cx="25.5" cy="28.5" r="2.8" fill="#2a1505"/>
+  <circle cx="39.5" cy="28.5" r="2.8" fill="#2a1505"/>
+  <circle cx="26.5" cy="27.2" r="0.9" fill="white"/>
+  <circle cx="40.5" cy="27.2" r="0.9" fill="white"/>
+  <path d="M23 23.5 Q25 22 27 23" stroke="#2a1505" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M37 23 Q39 22 41 23.5" stroke="#2a1505" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M29 38 Q32 42 35 38" stroke="#8a5530" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <ellipse cx="26" cy="35" rx="3" ry="1.5" fill="#ffb0b0" opacity="0.5"/>
+  <ellipse cx="38" cy="35" rx="3" ry="1.5" fill="#ffb0b0" opacity="0.5"/>
+</svg>`;
+
+        // ===================== COLOR PALETTE =====================
+        const colors = [
+            { color: 'var(--blue)', hex: '#4361EE', gradient: 'linear-gradient(135deg,#4361EE,#738dff)', btnStyle: 'background:linear-gradient(145deg,#5a74ff,#3651e0);color:white;box-shadow:4px 4px 10px rgba(67,97,238,0.3),-2px -2px 6px rgba(255,255,255,0.6)' },
+            { color: 'var(--green)', hex: '#2ec486', gradient: 'linear-gradient(135deg,#2ec486,#00a874)', btnStyle: 'background:linear-gradient(145deg,#3dd498,#24b07a);color:white;box-shadow:4px 4px 10px rgba(46,196,134,0.3),-2px -2px 6px rgba(255,255,255,0.6)' },
+            { color: 'var(--yellow)', hex: '#f5a623', gradient: 'linear-gradient(135deg,#f5a623,#e88c10)', btnStyle: 'background:linear-gradient(145deg,#ffb535,#e88c10);color:white;box-shadow:4px 4px 10px rgba(245,166,35,0.3),-2px -2px 6px rgba(255,255,255,0.6)' },
+            { color: 'var(--red)', hex: '#e84c6e', gradient: 'linear-gradient(135deg,#e84c6e,#c0304e)', btnStyle: 'background:linear-gradient(145deg,#f06080,#c83050);color:white;box-shadow:4px 4px 10px rgba(232,76,110,0.3),-2px -2px 6px rgba(255,255,255,0.6)' },
+        ];
+
+        const projIcons = ['🏦', '🏥', '🛍️', '🤖', '💡', '🚀', '📊', '🎨', '🔬', '🌐'];
+        const workIcons = [
+            `<rect x="1" y="5" width="16" height="12" rx="2" stroke="white" stroke-width="1.5"/><path d="M5 5V4a4 4 0 018 0v1" stroke="white" stroke-width="1.5"/>`,
+            `<polyline points="1,12 6,6 10,9 17,2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2h5v5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>`,
+            `<polygon points="9,2 11.5,7 17,7.5 13,11.5 14,17 9,14 4,17 5,11.5 1,7.5 6.5,7" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>`,
+            `<circle cx="9" cy="9" r="7" stroke="white" stroke-width="1.5"/><path d="M9 6v3l2 2" stroke="white" stroke-width="1.5" stroke-linecap="round"/>`,
+        ];
+        const eduIcons = ['🎓', '🏅', '⚡', '📚', '🔭'];
+
+        // ===================== LOAD RESUME =====================
+        async function loadResume() {
+            try {
+                if (window.location.hostname.includes("github.io") || window.location.hostname.includes("vercel.app")) {
+                    const res = await fetch("./settings.json");
+                    if (res.ok) return await res.json();
+                }
+                const urlParams = new URLSearchParams(window.location.search);
+                const dataUrl = urlParams.get("dataUrl");
+                if (dataUrl) {
+                    const res = await fetch(dataUrl);
+                    if (res.ok) return await res.json();
+                }
+                const raw = localStorage.getItem("parsedResume");
+                if (!raw) return null;
+                return JSON.parse(raw);
+            } catch { return null; }
+        }
+
+        // ===================== HELPERS =====================
+        function initials(name) {
+            if (!name) return '?';
+            const parts = name.trim().split(' ');
+            return parts.length >= 2 ? parts[0][0] + parts[parts.length - 1][0] : parts[0][0];
+        }
+
+        function getColorByIndex(i) { return colors[i % colors.length]; }
+
+        function isNonEmpty(arr) { return Array.isArray(arr) && arr.length > 0; }
+
+        // ===================== RENDER =====================
+        function render(resume) {
+            const profile = resume.profile || {};
+            const projects = resume.projects || [];
+            const work = resume.workExperiences || [];
+            const skills = resume.skills?.descriptions || [];
+            const education = resume.education || [];
+
+            // -- Nav initials logo --
+            const ini = initials(profile.name || 'P');
+            const navLogoText = document.getElementById('navLogoText');
+            if (navLogoText) {
+                navLogoText.innerHTML = `<tspan fill="#4285F4">${ini[0] || '?'}</tspan><tspan fill="#EA4335">.</tspan>${ini[1] ? `<tspan fill="#FBBC05">${ini[1]}</tspan>` : ''}`;
+            }
+            const heroLogoText = document.getElementById('heroLogoText');
+            if (heroLogoText) {
+                heroLogoText.innerHTML = `<tspan fill="#4285F4">${ini[0] || '?'}</tspan><tspan fill="#EA4335">.</tspan>${ini[1] ? `<tspan fill="#FBBC05">${ini[1]}</tspan>` : ''}`;
+            }
+
+            // -- Nav name --
+            const nameParts = (profile.name || 'Portfolio').split(' ');
+            document.getElementById('navName').textContent = nameParts.length >= 2
+                ? (nameParts[0].toLowerCase() + '.' + nameParts[nameParts.length - 1].toLowerCase())
+                : profile.name || '';
+
+            // -- Nav tabs --
+            const tabs = [
+                { id: 'about', label: 'About' },
+                ...(isNonEmpty(skills) ? [{ id: 'skills', label: 'Skills' }] : []),
+                ...(isNonEmpty(work) ? [{ id: 'work', label: 'Work' }] : []),
+                ...(isNonEmpty(projects) ? [{ id: 'projects', label: 'Projects' }] : []),
+                { id: 'contact', label: 'Contact' },
+            ];
+            document.getElementById('navTabs').innerHTML = tabs.map(t =>
+                `<button class="tab-btn${t.id === 'about' ? ' active' : ''}" onclick="setTab(this,'${t.id}')">${t.label}</button>`
+            ).join('');
+
+            // -- Card name/meta --
+            document.getElementById('cardName').textContent = profile.name || '';
+            document.getElementById('cardMeta').textContent = [profile.role, '2019–NOW'].filter(Boolean).join(' · ');
+            document.getElementById('cardLocation').textContent = profile.location ? profile.location.toUpperCase() : '';
+
+            // -- Stats --
+            document.getElementById('projectsCount').textContent = projects.length > 0 ? projects.length + '+' : '—';
+            document.getElementById('statProjects').textContent = projects.length > 0 ? projects.length + '+' : '—';
+            document.getElementById('statSkills').textContent = skills.length > 0 ? skills.length + '+' : '—';
+            // Years: try to parse from work experiences
+            let yearsText = '—';
+            if (isNonEmpty(work)) {
+                const durations = work.map(w => w.duration || '');
+                const years = durations.flatMap(d => d.match(/\d{4}/g) || []).map(Number);
+                if (years.length) {
+                    const span = Math.max(...years) - Math.min(...years);
+                    yearsText = (span > 0 ? span : 1) + '+';
+                }
+            }
+            document.getElementById('statYears').textContent = yearsText;
+
+            // -- Avatar --
+            const avatarEl = document.getElementById('avatarContainer');
+            if (profile.image && (profile.image.startsWith('http') || profile.image.startsWith('data:image'))) {
+                avatarEl.innerHTML = `<img src="${profile.image}" alt="${profile.name}" style="width:100%;height:100%;object-cover:cover;">`;
+            } else {
+                const isFemale = (profile.image || '').toLowerCase().includes('female');
+                avatarEl.innerHTML = isFemale ? femaleAvatar : maleAvatar;
+            }
+
+            // -- Profile info --
+            document.getElementById('profileName').textContent = profile.name || '';
+            document.getElementById('profileRole').textContent = profile.role || '';
+            document.getElementById('profileSummary').textContent = profile.summary || '';
+
+            // -- Skills grid (top 8 in hero) --
+            const skillsGridEl = document.getElementById('skillsGrid');
+            const skillsGridCard = document.getElementById('skillsGridCard');
+            if (isNonEmpty(skills)) {
+                const topSkills = skills.slice(0, 8);
+                skillsGridEl.innerHTML = topSkills.map((s, i) => {
+                    const c = getColorByIndex(i);
+                    return `<div class="neu-btn" style="padding:8px 14px;font-size:0.78rem;color:${c.color};font-weight:700">${s}</div>`;
+                }).join('');
+            } else {
+                skillsGridCard.style.display = 'none';
+            }
+
+            // -- Skills section chips --
+            const skillChipsEl = document.getElementById('skillChips');
+            if (isNonEmpty(skills)) {
+                skillChipsEl.innerHTML = skills.map((s, i) => {
+                    const c = getColorByIndex(i);
+                    return `<div class="neu-btn" style="padding:10px 18px;font-size:0.8rem;color:${c.color};font-weight:700">${s}</div>`;
+                }).join('');
+            } else {
+                document.getElementById('skills').style.display = 'none';
+            }
+
+            // -- Work Experience --
+            const workListEl = document.getElementById('workList');
+            if (isNonEmpty(work)) {
+                workListEl.innerHTML = work.map((job, i) => {
+                    const c = getColorByIndex(i);
+                    const icon = workIcons[i % workIcons.length];
+                    const delay = i * 0.08;
+                    return `
+            <div class="neu-card reveal work-item" style="padding:28px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start;transition-delay:${delay}s">
+                <div class="neu-circle" style="width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                    <div style="width:34px;height:34px;border-radius:10px;${c.gradient.replace('linear-gradient', 'background:linear-gradient')};display:flex;align-items:center;justify-content:center">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 18 18">${icon}</svg>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight:800;font-size:1rem;margin-bottom:3px">${job.position || ''}</div>
+                    <div style="font-size:0.82rem;color:${c.color};font-weight:700;margin-bottom:10px">${job.company || ''}</div>
+                    ${job.description ? `<p style="font-size:0.8rem;line-height:1.85;color:var(--text-muted)">${job.description}</p>` : ''}
+                </div>
+                <div style="text-align:right;flex-shrink:0" class="work-duration">
+                    <div class="neu-btn" style="padding:7px 14px;font-size:0.72rem;color:var(--text-muted);white-space:nowrap">${job.duration || ''}</div>
+                </div>
+            </div>`;
+                }).join('');
+            } else {
+                document.getElementById('work').style.display = 'none';
+            }
+
+            // -- Projects --
+            const projGridEl = document.getElementById('projectGrid');
+            const projDotsEl = document.getElementById('projDots');
+            if (isNonEmpty(projects)) {
+                projDotsEl.innerHTML = projects.slice(0, 6).map((_, i) =>
+                    `<div class="proj-dot${i === 0 ? ' active' : ''}"></div>`
+                ).join('');
+                projGridEl.innerHTML = projects.map((proj, i) => {
+                    const c = getColorByIndex(i);
+                    const icon = projIcons[i % projIcons.length];
+                    const delay = i * 0.06;
+                    const hasImg = proj.image && (proj.image.startsWith('http') || proj.image.startsWith('data:image'));
+                    const links = [
+                        proj.live_link ? `<a href="${proj.live_link}" target="_blank" class="neu-btn" style="padding:9px 18px;font-size:0.78rem;border-radius:12px;${c.btnStyle}">Live<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>` : '',
+                        proj.source_link ? `<a href="${proj.source_link}" target="_blank" class="neu-btn" style="padding:9px 18px;font-size:0.78rem;border-radius:12px;">Code<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>` : '',
+                    ].filter(Boolean).join('');
+                    const viewBtn = links || `<button class="neu-btn neu-btn-blue" style="padding:9px 18px;font-size:0.78rem;border-radius:12px">View<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>`;
+                    return `
+            <div class="neu-card reveal" style="padding:28px;transition-delay:${delay}s;position:relative;overflow:hidden">
+                <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,${c.hex}14,${c.hex}05)"></div>
+                ${hasImg ? `<div class="neu-inset" style="width:100%;height:280px;border-radius:14px;overflow:hidden;margin-bottom:18px"><img src="${proj.image}" style="object-fit:cover;" class="w-full h-full"></div>` : ''}
+                <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:8px">${proj.name || ''}</h3>
+                <p style="font-size:0.8rem;line-height:1.8;color:var(--text-muted);margin-bottom:18px">${proj.description || ''}</p>
+                <div style="height:1px;background:var(--shadow-dark);opacity:0.3;margin-bottom:14px"></div>
+                <div style="display:flex;justify-content:flex-end;gap:8px">${viewBtn}</div>
+            </div>`;
+                }).join('');
+            } else {
+                document.getElementById('projects').style.display = 'none';
+            }
+
+            // -- Education --
+            const eduGridEl = document.getElementById('educationGrid');
+            if (isNonEmpty(education)) {
+                const cols = Math.min(education.length, 3);
+                eduGridEl.style.gridTemplateColumns = `repeat(${cols},1fr)`;
+                eduGridEl.innerHTML = education.map((edu, i) => {
+                    const c = getColorByIndex(i);
+                    const icon = eduIcons[i % eduIcons.length];
+                    const delay = i * 0.08;
+                    return `
+            <div class="neu-card reveal" style="padding:26px;text-align:center;transition-delay:${delay}s">
+                <div class="neu-circle" style="width:60px;height:60px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem">${icon}</div>
+                <div class="neu-btn" style="padding:5px 12px;font-size:0.68rem;color:${c.color};display:inline-block;margin-bottom:12px">${edu.year || ''}</div>
+                <div style="font-weight:800;font-size:0.95rem;margin-bottom:4px">${edu.degree || ''}</div>
+                <div style="font-size:0.78rem;color:${c.color};font-weight:700;margin-bottom:10px">${edu.institution || ''}</div>
+            </div>`;
+                }).join('');
+            } else {
+                document.getElementById('educationSection').style.display = 'none';
+            }
+
+            // -- Contact --
+            document.getElementById('contactName').textContent = profile.name || '';
+            document.getElementById('contactEmail').textContent = profile.email || '';
+            document.getElementById('contactPhone').textContent = profile.phone || '';
+
+            // -- Send button: live mailto update --
+            function updateMailto() {
+                const name = document.getElementById('formSenderName').value.trim();
+                const from = document.getElementById('formSenderEmail').value.trim();
+                const message = document.getElementById('formMessage').value.trim();
+                const to = profile.email || '';
+                const subject = encodeURIComponent(`Message from ${name}`);
+                const body = encodeURIComponent(`From: ${name}\nEmail: ${from}\n\n${message}`);
+                document.getElementById('sendBtn').href = `mailto:${to}?subject=${subject}&body=${body}`;
+            }
+            ['formSenderName', 'formSenderEmail', 'formMessage'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updateMailto);
+            });
+            updateMailto();
+
+            // -- Footer --
+            document.getElementById('footerText').textContent = `© ${new Date().getFullYear()} ${profile.name || ''} · Crafted with light, shadow & depth.`;
+
+            // -- Page title --
+            if (profile.name) document.title = `${profile.name} — Portfolio`;
+
+            // -- Show nav --
+            document.querySelector('[id="navSection"], div[style*="padding-top:20px"]').style.display = '';
+
+            // -- Scroll reveal --
+            initReveal();
+        }
+
+        function initReveal() {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+        }
+
+        function setTab(el, id) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===================== BOOT =====================
+        loadResume().then(resume => {
+            if (!resume) {
+                document.body.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg)">
+                <p style="color:var(--red);font-size:1.25rem;font-weight:700;font-family:'Nunito',sans-serif">Resume data not found.</p>
+            </div>
+        `;
+            } else {
+                render(resume);
+            }
+        });
+    </script>
+</body>
+
+</html>
