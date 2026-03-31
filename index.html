@@ -779,24 +779,23 @@
         const eduIcons = ['🎓', '🏅', '⚡', '📚', '🔭'];
 
         // ===================== LOAD RESUME =====================
-        async function loadResume() {
-            try {
-                if (window.location.hostname.includes("github.io") || window.location.hostname.includes("vercel.app")) {
-                    const res = await fetch("./settings.json");
-                    if (res.ok) return await res.json();
-                }
-                const urlParams = new URLSearchParams(window.location.search);
-                const dataUrl = urlParams.get("dataUrl");
-                if (dataUrl) {
-                    const res = await fetch(dataUrl);
-                    if (res.ok) return await res.json();
-                }
-                const raw = localStorage.getItem("parsedResume");
-                if (!raw) return null;
-                return JSON.parse(raw);
-            } catch { return null; }
+     async function loadResume() {
+    try {
+        const res = await fetch("./settings.json");
+        if (res.ok) return await res.json();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataUrl = urlParams.get("dataUrl");
+        if (dataUrl) {
+            const res = await fetch(dataUrl);
+            if (res.ok) return await res.json();
         }
 
+        const raw = localStorage.getItem("parsedResume");
+        if (!raw) return null;
+        return JSON.parse(raw);
+    } catch { return null; }
+}
         // ===================== HELPERS =====================
         function initials(name) {
             if (!name) return '?';
