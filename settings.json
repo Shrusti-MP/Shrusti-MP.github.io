@@ -1,0 +1,66 @@
+{
+  "profile": {
+    "name": "SHRUSTI MP",
+    "email": "sshrustimp@gmail.com",
+    "role": "Software Developer / Web Developer",
+    "phone": "+916360009185",
+    "summary": "Highly motivated Computer Science and Engineering student with a CGPA of 9.21, specializing in Software Development and Web Development. Strong foundation in Python, Java, and Django with hands-on experience in building scalable web applications. Demonstrated leadership and problem-solving abilities through hackathons and technical projects. Passionate about developing technology-driven solutions that create real-world impact.",
+    "image": "",
+    "location": "",
+    "url": ""
+  },
+  "workExperiences": [],
+  "skills": {
+    "descriptions": [
+      "Java",
+      "Python",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Django",
+      "Bootstrap",
+      "Visual Studio",
+      "Arduino",
+      "Raspberry Pi Pico",
+      "OOP",
+      "Data Structures"
+    ]
+  },
+  "education": [
+    {
+      "institution": "Presidency University",
+      "degree": "Bachelor of Technology, CSE",
+      "year": "2027"
+    },
+    {
+      "institution": "Vani Pre University",
+      "degree": "Board of Intermediate Education",
+      "year": "2023"
+    },
+    {
+      "institution": "Sushikshitha English Medium High School",
+      "degree": "Board of Secondary Education",
+      "year": "2021"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Carpooling Web Application (Django)",
+      "description": "Developing a full-stack ride-sharing platform with authentication, ride posting, and booking management. Designed scalable backend architecture and responsive frontend for improved user experience. Focused on sustainable and efficient transportation solutions.",
+      "source_link": null,
+      "live_link": null
+    },
+    {
+      "name": "Real-Time Flood Monitoring & Alert System (IoT)",
+      "description": "Built IoT-based system using Raspberry Pi Pico to monitor water levels and trigger alerts. Enabled real-time early-warning support to reduce disaster impact. Integrated smart sensing and wireless communication technologies.",
+      "source_link": null,
+      "live_link": null
+    },
+    {
+      "name": "DIY Electronic Drum Pad (Arduino)",
+      "description": "Designed sensor-based percussion system using piezoelectric sensors and Arduino Uno. Programmed microcontroller to process signals and generate real-time audio output. Demonstrated hardware-software integration and embedded programming skills.",
+      "source_link": null,
+      "live_link": null
+    }
+  ]
+}
